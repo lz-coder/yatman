@@ -6,9 +6,17 @@ export default function IconLabelButton({
   className,
   showLabel = true,
   showIcon = true,
+  vAlign = false,
+  onClick,
 }) {
   return (
-    <IconButton className={className} icon={icon} showIcon={showIcon}>
+    <IconButton
+      className={className}
+      icon={icon}
+      showIcon={showIcon}
+      vAlign={vAlign}
+      onClick={onClick}
+    >
       {showLabel && label}
     </IconButton>
   );

@@ -1,7 +1,7 @@
-export default function IconButton({ icon, className }) {
+export default function IconButton({ icon, className, showIcon = true }) {
   return (
     <button className={className}>
-      {icon}
+      {showIcon && icon}
       <slot></slot>
     </button>
   );

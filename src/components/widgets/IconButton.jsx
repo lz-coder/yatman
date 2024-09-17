@@ -1,8 +1,13 @@
-export default function IconButton({ icon, className, showIcon = true }) {
+export default function IconButton({
+  icon,
+  className,
+  showIcon = true,
+  children,
+}) {
   return (
     <button className={className}>
       {showIcon && icon}
-      <slot></slot>
+      {children}
     </button>
   );
 }

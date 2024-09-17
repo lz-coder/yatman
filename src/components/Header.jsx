@@ -10,7 +10,7 @@ const Header = () => {
       <div className="flex items-center gap-2">
         <input
           type="search"
-          className="border-[1px] border-white bg-slate-500 px-1 text-black focus:bg-white"
+          className="border-[1px] border-white bg-slate-500 px-1 text-black focus:bg-white focus:outline-none"
         ></input>
         <IconButton
           icon={<BiSearch size={22} />}

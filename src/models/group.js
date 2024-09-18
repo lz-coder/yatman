@@ -1,8 +1,8 @@
-export default class GroupModel {
+import TileModel from "./tile";
+
+export default class GroupModel extends TileModel {
   constructor(name, background, icon) {
-    this.name = name;
-    this.background = background;
-    this.icon = icon;
+    super(name, background, icon);
     this.items = [];
   }
   

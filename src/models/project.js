@@ -1,7 +1,7 @@
-export default class ProjectModel {
+import TileModel from "./tile";
+
+export default class ProjectModel extends TileModel {
   constructor(name, background, icon) {
-    this.name = name;
-    this.background = background;
-    this.icon = icon;
+    super(name, background, icon);
   }
 }

@@ -117,6 +117,10 @@ export default function InitialPage() {
     setShowActionNew(true);
   }
 
+  function onTileDropped(data) {
+    setMainStorage(mainStorage.filter((item) => item.id !== data.id));
+  }
+
   return (
     <div className="m-auto w-full max-w-7xl">
       <div className="flex justify-center">
@@ -125,7 +129,12 @@ export default function InitialPage() {
       <main className="flex flex-wrap justify-center gap-2 py-6 sm:justify-normal">
         {mainStorage.map((item) => {
           return (
-            <Tile key={item.id} data={item} onCheckChange={selectTileHandler} />
+            <Tile
+              key={item.id}
+              data={item}
+              onCheckChange={selectTileHandler}
+              onDropped={onTileDropped}
+            />
           );
         })}
       </main>

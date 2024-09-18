@@ -51,14 +51,16 @@ export default function ProjectGroupCreationModal({
             className="bg-green-600 px-3 py-1 hover:bg-green-400"
             onClick={() => {
               let itemToCreate;
-              if (createType === "project") {
-                itemToCreate = new ProjectModel(itemName, "green", "default");
-              } else if (createType === "group") {
+              if (createType === "project" && itemName.trim().length > 0) {
+                itemToCreate = new ProjectModel(itemName, "red", "default");
+              } else if (createType === "group" && itemName.trim().length > 0) {
                 itemToCreate = new GroupModel(itemName, "blue", "default");
               }
 
-              creationHandler(itemToCreate);
-              closeHandler();
+              if (itemToCreate) {
+                creationHandler(itemToCreate);
+                closeHandler();
+              }
             }}
           >
             Create {createType}

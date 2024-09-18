@@ -80,6 +80,9 @@ export default function InitialPage() {
       showActionMove = false;
     }
 
+    if (!mainStorage.find((data) => data instanceof GroupModel))
+      showActionMove = false;
+
     setShowActionDelete(showActionDel);
     setShowActionGroup(showActionGroup);
     setShowActionMove(showActionMove);

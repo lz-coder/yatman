@@ -7,6 +7,8 @@ import GroupModel from "../models/group";
 
 export default function InitialPage() {
   const [showProjectModal, setShowProjectModal] = useState(false);
+  const [modalGroupMode, setModalGroupMode] = useState(false);
+
   const [mainStorage, setMainStorage] = useState([]);
   const [selectedTiles, setSelectedTiles] = useState([]);
 
@@ -20,6 +22,7 @@ export default function InitialPage() {
       label: "New",
       icon: <FaPlus />,
       action: () => {
+        setModalGroupMode(false);
         setShowProjectModal(true);
       },
       show: showActionNew,
@@ -35,7 +38,10 @@ export default function InitialPage() {
     {
       label: "Group",
       icon: <FaFolder />,
-      action: () => {},
+      action: () => {
+        setModalGroupMode(true);
+        setShowProjectModal(true);
+      },
       show: showActionGroup,
     },
     {
@@ -46,8 +52,22 @@ export default function InitialPage() {
     },
   ];
 
-  function createProjectGoup(item) {
-    mainStorage.push(item);
+  function createProjectGroup(item, groupMode = false) {
+    let currentStorage = mainStorage;
+
+    if (groupMode) {
+      currentStorage = mainStorage.filter(
+        (item) => !selectedTiles.includes(item),
+      );
+      setSelectedTiles([]);
+      setShowActionNew(true);
+      setShowActionDelete(false);
+      setShowActionGroup(false);
+      setShowActionMove(false);
+    }
+
+    currentStorage.push(item);
+    setMainStorage(currentStorage);
   }
 
   function selectTileHandler(e, tileData) {
@@ -112,9 +132,18 @@ export default function InitialPage() {
 
       {showProjectModal && (
         <ProjectGroupCreationModal
-          title="New Project or Group"
-          closeHandler={() => setShowProjectModal(false)}
-          creationHandler={createProjectGoup}
+          title={modalGroupMode ? "New Group" : "New Project or Group"}
+          closeHandler={
+            modalGroupMode
+              ? () => setShowProjectModal(false)
+              : () => {
+                  setModalGroupMode(false);
+                  setShowProjectModal(false);
+                }
+          }
+          creationHandler={createProjectGroup}
+          groupMode={modalGroupMode}
+          selectedItems={selectedTiles}
         />
       )}
     </div>

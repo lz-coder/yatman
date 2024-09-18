@@ -1,6 +1,6 @@
 export default class TileModel {
-  constructor(name, background, icon, creationDate, updatedDate) {
-    this.id = crypto.randomUUID();
+  constructor(id, name, background, icon, creationDate, updatedDate) {
+    this.id = id;
     this.name = name;
     this.background = background;
     this.icon = icon;

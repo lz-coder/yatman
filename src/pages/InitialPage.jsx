@@ -27,7 +27,9 @@ export default function InitialPage() {
     {
       label: "Delete",
       icon: <FaTrash />,
-      action: () => {},
+      action: () => {
+        deleteSelectedTile();
+      },
       show: showActionDelete,
     },
     {
@@ -83,15 +85,24 @@ export default function InitialPage() {
     setShowActionMove(showActionMove);
   }
 
+  function deleteSelectedTile() {
+    setMainStorage(mainStorage.filter((item) => !selectedTiles.includes(item)));
+    setSelectedTiles([]);
+    setShowActionDelete(false);
+    setShowActionGroup(false);
+    setShowActionMove(false);
+    setShowActionNew(true);
+  }
+
   return (
     <div className="m-auto w-full max-w-7xl">
       <div className="flex justify-center">
         <ActionsToolbar actions={actionsList} />
       </div>
       <main className="flex flex-wrap justify-center gap-2 py-6 sm:justify-normal">
-        {mainStorage.map((item, index) => {
+        {mainStorage.map((item) => {
           return (
-            <Tile key={index} data={item} onCheckChange={selectTileHandler} />
+            <Tile key={item.id} data={item} onCheckChange={selectTileHandler} />
           );
         })}
       </main>

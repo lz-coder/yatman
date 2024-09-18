@@ -1,12 +1,19 @@
 import ActionsToolbar from "../components/ActionsToolbar";
 import ProjectGroupCreationModal from "../components/ProjectGroupCreationModal";
 import { FaPlus, FaTrash, FaFolder, FaArrowsAlt } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tile from "../components/Tile";
+import GroupModel from "../models/group";
 
 export default function InitialPage() {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [mainStorage, setMainStorage] = useState([]);
+  const [selectedTiles, setSelectedTiles] = useState([]);
+
+  const [showActionNew, setShowActionNew] = useState(true);
+  const [showActionDelete, setShowActionDelete] = useState(false);
+  const [showActionGroup, setShowActionGroup] = useState(false);
+  const [showActionMove, setShowActionMove] = useState(false);
 
   const actionsList = [
     {
@@ -15,16 +22,65 @@ export default function InitialPage() {
       action: () => {
         setShowProjectModal(true);
       },
-      show: true,
+      show: showActionNew,
     },
-    { label: "Delete", icon: <FaTrash />, action: () => {}, show: false },
-    { label: "Group", icon: <FaFolder />, action: () => {}, show: false },
-    { label: "Move", icon: <FaArrowsAlt />, action: () => {}, show: false },
+    {
+      label: "Delete",
+      icon: <FaTrash />,
+      action: () => {},
+      show: showActionDelete,
+    },
+    {
+      label: "Group",
+      icon: <FaFolder />,
+      action: () => {},
+      show: showActionGroup,
+    },
+    {
+      label: "Move",
+      icon: <FaArrowsAlt />,
+      action: () => {},
+      show: showActionMove,
+    },
   ];
 
   function createProjectGoup(item) {
     mainStorage.push(item);
-    console.log(mainStorage);
+  }
+
+  function selectTileHandler(e, tileData) {
+    const currentSelectedTiles = selectedTiles;
+
+    let showActionGroup = true;
+    let showActionDel = true;
+    let showActionMove = true;
+
+    if (e.target.checked) {
+      currentSelectedTiles.push(tileData);
+      setSelectedTiles(currentSelectedTiles);
+
+      setShowActionNew(false);
+    } else {
+      const tileIndex = currentSelectedTiles.indexOf(tileData);
+      currentSelectedTiles.splice(tileIndex, 1);
+      setSelectedTiles(currentSelectedTiles);
+
+      if (selectedTiles.length <= 0) {
+        setShowActionNew(true);
+        showActionDel = false;
+        showActionGroup = false;
+        showActionMove = false;
+      }
+    }
+
+    if (selectedTiles.find((data) => data instanceof GroupModel)) {
+      showActionGroup = false;
+      showActionMove = false;
+    }
+
+    setShowActionDelete(showActionDel);
+    setShowActionGroup(showActionGroup);
+    setShowActionMove(showActionMove);
   }
 
   return (
@@ -34,7 +90,9 @@ export default function InitialPage() {
       </div>
       <main className="flex flex-wrap justify-center gap-2 py-6 sm:justify-normal">
         {mainStorage.map((item, index) => {
-          return <Tile key={index} data={item} />;
+          return (
+            <Tile key={index} data={item} onCheckChange={selectTileHandler} />
+          );
         })}
       </main>
 

@@ -1,6 +1,6 @@
 import { IoClose } from "react-icons/io5";
 
-const Modal = ({ title, children, closeHandler }) => {
+const Modal = ({ title, children, closeHandler, onKeyUp }) => {
   return (
     <div
       className="fixed left-0 top-0 h-full w-full overflow-hidden bg-black bg-opacity-20"
@@ -9,6 +9,7 @@ const Modal = ({ title, children, closeHandler }) => {
       <div
         className="mx-auto mt-36 flex max-w-xl flex-col border-2 border-solid border-slate-700 bg-slate-600 p-2 text-white"
         onClick={(e) => e.stopPropagation()}
+        onKeyUp={onKeyUp}
       >
         <div className="relative mb-6">
           <p className="text-center text-lg font-bold">{title}</p>

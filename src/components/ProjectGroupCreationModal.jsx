@@ -47,8 +47,14 @@ export default function ProjectGroupCreationModal({
     }
   }
 
+  function keyupHandler(evt) {
+    if (evt.key == "Enter") {
+      createItem();
+    }
+  }
+
   return (
-    <Modal title={title} closeHandler={closeHandler}>
+    <Modal title={title} closeHandler={closeHandler} onKeyUp={keyupHandler}>
       <div>
         {!groupMode && (
           <div className="flex items-center justify-center gap-2">

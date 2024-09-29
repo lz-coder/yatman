@@ -4,10 +4,12 @@ import { FaPlus, FaTrash, FaFolder, FaArrowsAlt } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Tile from "../components/Tile";
 import GroupModel from "../models/group";
+import ConfirmationDialog from "../components/ConfirmationDialog";
 
 export default function InitialPage() {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [modalGroupMode, setModalGroupMode] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const [mainStorage, setMainStorage] = useState([]);
   const [selectedTiles, setSelectedTiles] = useState([]);
@@ -31,7 +33,7 @@ export default function InitialPage() {
       label: "Delete",
       icon: <FaTrash />,
       action: () => {
-        deleteSelectedTile();
+        setShowDeleteConfirmation(true);
       },
       show: showActionDelete,
     },
@@ -153,6 +155,18 @@ export default function InitialPage() {
           creationHandler={createProjectGroup}
           groupMode={modalGroupMode}
           selectedItems={selectedTiles}
+        />
+      )}
+      {showDeleteConfirmation && (
+        <ConfirmationDialog
+          title="Items removal confirmation!"
+          message="You are sure that confirm this action?"
+          isDestructive={true}
+          confirmationCallback={() => {
+            deleteSelectedTile();
+            setShowDeleteConfirmation(false);
+          }}
+          closeDialogCallback={() => setShowDeleteConfirmation(false)}
         />
       )}
     </div>

@@ -1,11 +1,11 @@
 import Header from "./components/Header";
-import InitialPage from "./pages/InitialPage";
+import MainScreen from "./pages/MainScreen";
 
 function App() {
   return (
     <>
       <Header />
-      <InitialPage />
+      <MainScreen />
     </>
   );
 }

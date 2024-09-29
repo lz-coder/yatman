@@ -14,8 +14,6 @@ export default function ProjectGroupCreationModal({
   const [createType, setCreateType] = useState(groupMode ? "group" : "project");
   const [itemName, setItemName] = useState("");
 
-  console.log(groupMode);
-
   function handleCreationType(e) {
     setCreateType(e.target.value);
   }
@@ -50,6 +48,9 @@ export default function ProjectGroupCreationModal({
   function keyupHandler(evt) {
     if (evt.key == "Enter") {
       createItem();
+    }
+    if (evt.key == "Escape") {
+      closeHandler();
     }
   }
 

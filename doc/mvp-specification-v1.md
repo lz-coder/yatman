@@ -24,7 +24,9 @@ Then:
 The main and group screen are displayed in a tile based aproach, whereas the project screen displays the tasks on it in a list based model.
 
 #### Implementation Spec:
-- Can create Projects and/or groups on the main screen.
+- Can create Projects and groups on the main screen ✅
+- On main screen Projects can be moved into a group ✅
+- On main screen can create a new Group from a list of selected Projects ✅
 - Can create Projects inside a group.
 - Can create tasks inside a project.
 - Tasks can have subtasks.

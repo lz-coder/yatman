@@ -54,7 +54,7 @@ export default function InitialPage() {
     },
   ];
 
-  function createProjectGroup(item, groupMode = false) {
+  function createProjectGroup(tile, groupMode = false) {
     let currentStorage = mainStorage;
 
     if (groupMode) {
@@ -68,7 +68,7 @@ export default function InitialPage() {
       setShowActionMove(false);
     }
 
-    currentStorage.push(item);
+    currentStorage.push(tile);
     setMainStorage(currentStorage);
   }
 
@@ -121,6 +121,16 @@ export default function InitialPage() {
 
   function onTileDropped(data) {
     setMainStorage(mainStorage.filter((item) => item.id !== data.id));
+    if (selectedTiles.length > 0) {
+      selectedTiles.splice(selectedTiles.indexOf(data), 1);
+      setSelectedTiles(selectedTiles);
+    }
+    if (selectedTiles.length <= 0) {
+      setShowActionNew(true);
+      setShowActionDelete(false);
+      setShowActionGroup(false);
+      setShowActionMove(false);
+    }
   }
 
   return (

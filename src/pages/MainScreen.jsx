@@ -113,10 +113,7 @@ export default function InitialPage() {
   function deleteSelectedTile() {
     setMainStorage(mainStorage.filter((item) => !selectedTiles.includes(item)));
     setSelectedTiles([]);
-    setShowActionDelete(false);
-    setShowActionGroup(false);
-    setShowActionMove(false);
-    setShowActionNew(true);
+    resetActions();
   }
 
   function onTileDropped(data) {
@@ -125,12 +122,14 @@ export default function InitialPage() {
       selectedTiles.splice(selectedTiles.indexOf(data), 1);
       setSelectedTiles(selectedTiles);
     }
-    if (selectedTiles.length <= 0) {
-      setShowActionNew(true);
-      setShowActionDelete(false);
-      setShowActionGroup(false);
-      setShowActionMove(false);
-    }
+    if (selectedTiles.length <= 0) resetActions();
+  }
+
+  function resetActions() {
+    setShowActionNew(true);
+    setShowActionDelete(false);
+    setShowActionGroup(false);
+    setShowActionMove(false);
   }
 
   return (

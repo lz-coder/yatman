@@ -17,20 +17,21 @@ Projects can be created on the main screen and on a group screen.
 Tasks can only be created within a project.
 
 Then:
-  - Groups are collections of projects.  
-  - Projects are collections of tasks.  
-  - Tasks are activities to be completed.  
+
+- Groups are collections of projects.
+- Projects are collections of tasks.
+- Tasks are activities to be completed.
 
 The main and group screen are displayed in a tile based aproach, whereas the project screen displays the tasks on it in a list based model.
 
 #### Implementation Spec:
+
 - Can create Projects and groups on the main screen ✅
 - On main screen Projects can be moved into a group ✅
 - On main screen can create a new Group from a list of selected Projects ✅
 - Can create Projects inside a group.
 - Can create tasks inside a project.
+- Can move selected Project(s) into a group.
 - Tasks can have subtasks.
 - general local CRUD operations for Projects, Groups and Tasks.
-- 
-
-
+-

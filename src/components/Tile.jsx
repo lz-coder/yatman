@@ -2,7 +2,13 @@ import ProjectModel from "../models/project";
 import GroupModel from "../models/group";
 import { FaBox, FaFolder } from "react-icons/fa";
 
-export default function Tile({ data, onCheckChange, onDropped }) {
+export default function Tile({
+  data,
+  onCheckChange,
+  onDropped,
+  onGroup = false,
+  onClick,
+}) {
   let tileStyleClasses;
   // const tileStyleClasses = `bg-${data.background}-300 border-${data.background}-300 hover:border-${data.background}-400`;
   let isGroup = data instanceof GroupModel;
@@ -39,6 +45,7 @@ export default function Tile({ data, onCheckChange, onDropped }) {
     ev.preventDefault();
     ev.dataTransfer.dropEffect = "move";
   }
+
   function dropHandler(ev) {
     ev.preventDefault();
     const dragData = ev.dataTransfer.getData("application/json");
@@ -48,7 +55,7 @@ export default function Tile({ data, onCheckChange, onDropped }) {
       tileObject.name,
       tileObject.background,
       tileObject.icon,
-      tileObject.creationDate,
+      new Date(tileObject.creationDate),
       tileObject.updatedDate,
       tileObject.id,
     );
@@ -60,12 +67,19 @@ export default function Tile({ data, onCheckChange, onDropped }) {
   return (
     <div
       className={`flex h-32 w-32 cursor-pointer flex-col justify-between border-2 border-solid p-1 ${tileStyleClasses}`}
-      draggable={isProject}
+      draggable={isProject && !onGroup}
       onDragStart={dragStartHandler}
       {...groupTileProps}
+      onClick={onClick}
     >
       <div className="flex h-1/5 justify-between">
-        <input type="checkbox" onChange={(e) => onCheckChange(e, data)}></input>
+        {!onGroup && (
+          <input
+            type="checkbox"
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => onCheckChange(e, data)}
+          ></input>
+        )}
         <div className="text-white">{tileIcon}</div>
       </div>
       <div className="text-sm">

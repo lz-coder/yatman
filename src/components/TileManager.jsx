@@ -7,7 +7,11 @@ import GroupModel from "../models/group";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import TileViewer from "../components/TileViewer";
 
-export default function TileManager({ tilesStorage, onGroup = false }) {
+export default function TileManager({
+  tilesStorage,
+  onGroup = false,
+  groupItem,
+}) {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [modalGroupMode, setModalGroupMode] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -112,7 +116,9 @@ export default function TileManager({ tilesStorage, onGroup = false }) {
   }
 
   function deleteSelectedTile() {
-    setMainStorage(mainStorage.filter((item) => !selectedTiles.includes(item)));
+    tilesStorage = mainStorage.filter((item) => !selectedTiles.includes(item));
+    if (onGroup) groupItem.items = tilesStorage;
+    setMainStorage(tilesStorage);
     setSelectedTiles([]);
     resetActions();
   }

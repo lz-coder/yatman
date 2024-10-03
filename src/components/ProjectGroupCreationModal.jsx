@@ -10,6 +10,7 @@ export default function ProjectGroupCreationModal({
   creationHandler,
   groupMode = false,
   selectedItems,
+  onGroup = false,
 }) {
   const [createType, setCreateType] = useState(groupMode ? "group" : "project");
   const [itemName, setItemName] = useState("");
@@ -57,7 +58,7 @@ export default function ProjectGroupCreationModal({
   return (
     <Modal title={title} closeHandler={closeHandler} onKeyUp={keyupHandler}>
       <div>
-        {!groupMode && (
+        {!groupMode && !onGroup && (
           <div className="flex items-center justify-center gap-2">
             <RadioOption
               label="New Project"

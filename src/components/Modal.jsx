@@ -14,7 +14,7 @@ const Modal = ({
       onClick={closeHandler}
     >
       <div
-        className={`mx-auto mb-40 flex min-w-80 max-w-xs flex-col border-2 border-solid border-slate-700 bg-slate-600 p-2 text-white md:max-w-xl ${dialogClasses}`}
+        className={`mb-40 flex w-full max-w-sm flex-col border-2 border-solid border-slate-700 bg-slate-600 p-2 text-white md:w-auto md:min-w-80 md:max-w-xl ${dialogClasses}`}
         onClick={(e) => e.stopPropagation()}
         onKeyUp={onKeyUp}
       >

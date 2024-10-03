@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Tile from "../components/Tile";
 import GroupModel from "../models/group";
 import ConfirmationDialog from "../components/ConfirmationDialog";
+import TileViewer from "../components/TileViewer";
 
 export default function InitialPage() {
   const [showProjectModal, setShowProjectModal] = useState(false);
@@ -18,6 +19,9 @@ export default function InitialPage() {
   const [showActionDelete, setShowActionDelete] = useState(false);
   const [showActionGroup, setShowActionGroup] = useState(false);
   const [showActionMove, setShowActionMove] = useState(false);
+
+  const [showTileViewer, setShowTileViewer] = useState(false);
+  const [tileToShow, setTileToShow] = useState(null);
 
   const actionsList = [
     {
@@ -145,6 +149,10 @@ export default function InitialPage() {
               data={item}
               onCheckChange={selectTileHandler}
               onDropped={onTileDropped}
+              onClick={() => {
+                setTileToShow(item);
+                setShowTileViewer(true);
+              }}
             />
           );
         })}
@@ -176,6 +184,12 @@ export default function InitialPage() {
             setShowDeleteConfirmation(false);
           }}
           closeDialogCallback={() => setShowDeleteConfirmation(false)}
+        />
+      )}
+      {showTileViewer && (
+        <TileViewer
+          tile={tileToShow}
+          closeCallback={() => setShowTileViewer(false)}
         />
       )}
     </div>

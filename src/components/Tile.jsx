@@ -15,10 +15,10 @@ export default function Tile({
   let isProject = data instanceof ProjectModel;
 
   isGroup &&
-    (tileStyleClasses = `bg-blue-300 border-blue-300 hover:border-blue-400`);
+    (tileStyleClasses = `bg-blue-300 border-blue-300 hover:outline hover:outline-blue-400`);
 
   isProject &&
-    (tileStyleClasses = `bg-red-300 border-red-300 hover:border-red-400`);
+    (tileStyleClasses = `bg-red-300 border-red-300 hover:outline hover:outline-red-400`);
 
   let tileIcon;
   let tileIconsSize = 22;
@@ -66,7 +66,7 @@ export default function Tile({
 
   return (
     <div
-      className={`flex h-32 w-32 cursor-pointer flex-col justify-between border-2 border-solid p-1 ${tileStyleClasses}`}
+      className={`flex h-32 w-32 cursor-pointer flex-col justify-between border-2 p-1 ${tileStyleClasses}`}
       draggable={isProject && !onGroup}
       onDragStart={dragStartHandler}
       {...groupTileProps}

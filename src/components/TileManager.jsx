@@ -134,7 +134,7 @@ export default function TileManager({ tilesStorage, onGroup = false }) {
   }
 
   return (
-    <div className="m-auto w-full max-w-7xl">
+    <div className={`${!onGroup && "m-auto"} w-full max-w-7xl`}>
       <div className="flex justify-center">
         <ActionsToolbar actions={actionsList} />
       </div>

@@ -73,16 +73,14 @@ export default function Tile({
       onClick={onClick}
     >
       <div className="flex h-1/5 justify-between">
-        {!onGroup && (
-          <input
-            type="checkbox"
-            onClick={(e) => e.stopPropagation()}
-            onChange={(e) => onCheckChange(e, data)}
-          ></input>
-        )}
+        <input
+          type="checkbox"
+          onClick={(e) => e.stopPropagation()}
+          onChange={(e) => onCheckChange(e, data)}
+        ></input>
         <div className="text-white">{tileIcon}</div>
       </div>
-      <div className="text-sm">
+      <div className="text-sm text-black">
         <p>{isGroup && `projects: ${data.items.length}`}</p>
         <p>{`C: ${formattedDate}`}</p>
       </div>

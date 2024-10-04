@@ -52,7 +52,7 @@ export default function TileManager({
         setModalGroupMode(true);
         setShowProjectModal(true);
       },
-      show: showActionGroup,
+      show: !onGroup && showActionGroup,
     },
     {
       label: "Move",
@@ -142,7 +142,7 @@ export default function TileManager({
   return (
     <div className={`${!onGroup && "m-auto"} w-full max-w-7xl`}>
       <div className="flex justify-center">
-        <ActionsToolbar actions={actionsList} />
+        <ActionsToolbar actions={actionsList} className={onGroup && "!mt-1"} />
       </div>
       <main className="flex flex-wrap justify-center gap-2 py-6 sm:justify-normal">
         {mainStorage.map((item) => {
@@ -152,6 +152,7 @@ export default function TileManager({
               data={item}
               onCheckChange={selectTileHandler}
               onDropped={onTileDropped}
+              onGroup={onGroup}
               onClick={
                 item instanceof GroupModel
                   ? () => {

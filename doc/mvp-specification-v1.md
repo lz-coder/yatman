@@ -29,7 +29,7 @@ The main and group screen are displayed in a tile based aproach, whereas the pro
 - Can create Projects and groups on the main screen ✅
 - On main screen Projects can be moved into a group ✅
 - On main screen can create a new Group from a list of selected Projects ✅
-- Can create Projects inside a group.
+- Can create Projects inside a group ✅
 - Can create tasks inside a project.
 - Can move selected Project(s) into a group.
 - Tasks can have subtasks.

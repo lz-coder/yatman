@@ -25,8 +25,8 @@ export default class ProjectModel extends TileModel {
   }
 
   removeTask(task) {
-    const taskInTasks = this.tasks.indexOf(task);
-    if (!taskInTasks) throw new Error("Given task not founded");
-    this.tasks.splice(taskInTasks, 1);
+    if (!this.tasks.find((item) => item.id === task.id))
+      throw new Error("Given task not founded");
+    this.tasks.splice(this.tasks.indexOf(task), 1);
   }
 }

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import IconLabelButton from "./widgets/IconLabelButton";
-import { FaPlus } from "react-icons/fa";
+import { FaPen, FaPlus, FaTrash } from "react-icons/fa";
 import TaskModel from "../models/task";
 import SubtaskItem from "./SubtaskItem";
 
-export default function TaskItem({ task, onCompleted }) {
+export default function TaskItem({ task, onCompleted, deleteCallback }) {
   const [completed, setCompleted] = useState(task.completed);
   const [expanded, setExpanded] = useState(false);
   const [subtasksStorage, setSubtasksStorage] = useState(task.subtasks);
@@ -37,7 +37,12 @@ export default function TaskItem({ task, onCompleted }) {
           ></input>
         </div>
         <div className="w-full text-center font-bold">{task.name}</div>
-        <div className="w-fit">
+        <div className="flex w-fit gap-4">
+          <IconLabelButton
+            icon={<FaPen size={14} />}
+            onClick={() => console.log("open task editor")}
+            className="hover:text-blue-500"
+          />
           <IoMdArrowDropdown
             size={28}
             onClick={() => setExpanded(!expanded)}
@@ -66,7 +71,7 @@ export default function TaskItem({ task, onCompleted }) {
             </div>
           )}
 
-          <div className="mt-2 px-1">
+          <div className="mt-2 flex justify-between px-1">
             <IconLabelButton
               label="add subtask"
               icon={<FaPlus />}
@@ -74,6 +79,11 @@ export default function TaskItem({ task, onCompleted }) {
                 task.addSubtask(new TaskModel("subtask", "", false));
                 updateSubtasksStorage();
               }}
+            />
+            <IconLabelButton
+              label="delete"
+              icon={<FaTrash />}
+              onClick={() => deleteCallback(task)}
             />
           </div>
         </div>

@@ -20,6 +20,11 @@ export default function TasksManager({ project, closeCallback }) {
     },
   ];
 
+  function deleteTasks(task) {
+    project.removeTask(task);
+    updateTasksStorage();
+  }
+
   function updateTasksStorage() {
     setTasksStorage(Array.of(...project.tasks));
   }
@@ -46,6 +51,7 @@ export default function TasksManager({ project, closeCallback }) {
                 key={task.id}
                 task={task}
                 onCompleted={updateTasksStorage}
+                deleteCallback={deleteTasks}
               />
             );
           })}

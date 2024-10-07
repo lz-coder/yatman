@@ -1,6 +1,7 @@
 import ProjectModel from "../models/project";
 import GroupModel from "../models/group";
 import { FaBox, FaFolder } from "react-icons/fa";
+import TaskModel from "../models/task";
 
 export default function Tile({
   data,
@@ -60,7 +61,16 @@ export default function Tile({
       tileObject.id,
     );
 
-    objectInstance.setTasks = tileObject.tasks;
+    const tasksArray = [];
+
+    tileObject.tasks.forEach((task) => {
+      const taskObject = new TaskModel(task.name, task.desc, task.completed);
+      taskObject.id = task.id;
+      taskObject.subtasks = task.subtasks;
+      tasksArray.push(taskObject);
+    });
+
+    objectInstance.setTasks = tasksArray;
 
     data.items.push(objectInstance);
     onDropped(objectInstance);

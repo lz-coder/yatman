@@ -6,6 +6,7 @@ import Tile from "../components/Tile";
 import GroupModel from "../models/group";
 import ConfirmationDialog from "../components/ConfirmationDialog";
 import TileViewer from "../components/TileViewer";
+import TasksManager from "./TasksManager";
 
 export default function TileManager({
   tilesStorage,
@@ -26,6 +27,9 @@ export default function TileManager({
 
   const [showTileViewer, setShowTileViewer] = useState(false);
   const [tileToShow, setTileToShow] = useState(null);
+
+  const [showTasksManager, setShowTasksManager] = useState(false);
+  const [projectToManage, setProjectToManage] = useState(null);
 
   const actionsList = [
     {
@@ -159,7 +163,10 @@ export default function TileManager({
                       setTileToShow(item);
                       setShowTileViewer(true);
                     }
-                  : () => console.log("open tasks manager")
+                  : () => {
+                      setProjectToManage(item);
+                      setShowTasksManager(true);
+                    }
               }
             />
           );
@@ -183,6 +190,7 @@ export default function TileManager({
           onGroup={onGroup}
         />
       )}
+
       {showDeleteConfirmation && (
         <ConfirmationDialog
           title="Items removal confirmation!"
@@ -195,10 +203,18 @@ export default function TileManager({
           closeDialogCallback={() => setShowDeleteConfirmation(false)}
         />
       )}
+
       {showTileViewer && (
         <TileViewer
           tile={tileToShow}
           closeCallback={() => setShowTileViewer(false)}
+        />
+      )}
+
+      {showTasksManager && (
+        <TasksManager
+          project={projectToManage}
+          closeCallback={() => setShowTasksManager(false)}
         />
       )}
     </div>

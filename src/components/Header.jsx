@@ -3,7 +3,7 @@ import IconButton from "./widgets/IconButton";
 
 const Header = () => {
   return (
-    <header className="flex min-h-8 flex-col items-center justify-center bg-slate-700 py-2 font-bold text-white sm:flex-row">
+    <header className="flex min-h-8 flex-col items-center justify-center bg-slate-700 py-2 font-bold text-white shadow-md sm:flex-row">
       <h1 className="mb-2 border-[1px] border-solid border-white px-2 sm:mb-0 sm:mr-2">
         YATMAN
       </h1>

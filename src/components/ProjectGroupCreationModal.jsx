@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Modal from "./Modal";
 import RadioOption from "./widgets/RadioOption";
 import ProjectModel from "../models/project";
@@ -14,6 +14,12 @@ export default function ProjectGroupCreationModal({
 }) {
   const [createType, setCreateType] = useState(groupMode ? "group" : "project");
   const [itemName, setItemName] = useState("");
+
+  const tileNameInputRef = useRef(null);
+
+  useEffect(() => {
+    if (tileNameInputRef) tileNameInputRef.current.focus();
+  }, [tileNameInputRef]);
 
   function handleCreationType(e) {
     setCreateType(e.target.value);
@@ -85,6 +91,7 @@ export default function ProjectGroupCreationModal({
               onChange={(e) => setItemName(e.target.value)}
               className="text-black"
               type="text"
+              ref={tileNameInputRef}
             ></input>
           </div>
         </div>

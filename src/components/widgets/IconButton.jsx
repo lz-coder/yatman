@@ -8,7 +8,7 @@ export default function IconButton({
 }) {
   return (
     <button
-      className={`flex items-center justify-center ${vAlign ? "flex-col" : "flex-row"} ${className}`}
+      className={`flex items-center justify-center ${vAlign ? "flex-col" : "flex-row gap-1"} ${className}`}
       onClick={onClick}
     >
       {showIcon && icon}

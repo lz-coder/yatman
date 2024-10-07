@@ -60,13 +60,15 @@ export default function Tile({
       tileObject.id,
     );
 
+    objectInstance.setTasks = tileObject.tasks;
+
     data.items.push(objectInstance);
     onDropped(objectInstance);
   }
 
   return (
     <div
-      className={`flex h-32 w-32 cursor-pointer flex-col justify-between border-2 p-1 ${tileStyleClasses}`}
+      className={`flex h-32 w-32 cursor-pointer flex-col justify-between border-2 p-1 shadow-md ${tileStyleClasses}`}
       draggable={isProject && !onGroup}
       onDragStart={dragStartHandler}
       {...groupTileProps}
@@ -82,9 +84,10 @@ export default function Tile({
       </div>
       <div className="text-sm text-black">
         <p>{isGroup && `projects: ${data.items.length}`}</p>
+        <p>{isProject && `tasks: ${data.tasks.length}`}</p>
         <p>{`C: ${formattedDate}`}</p>
       </div>
-      <p className="h-1/5 w-full bg-black bg-opacity-50 text-center text-gray-200">
+      <p className="h-1/5 w-full overflow-hidden text-ellipsis bg-black bg-opacity-50 pl-1 text-center text-gray-200">
         {data.name}
       </p>
     </div>

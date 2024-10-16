@@ -13,7 +13,7 @@ export default function TasksManager({ project, closeCallback }) {
       label: "New Task",
       icon: <FaPlus />,
       action: () => {
-        project.addTask(new TaskModel("task", "just a simple task", false));
+        project.addTask(new TaskModel("", "", false));
         updateTasksStorage();
       },
       show: true,

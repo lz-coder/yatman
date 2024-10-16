@@ -6,7 +6,7 @@ export default function TileViewer({ tile, closeCallback }) {
     <Modal
       title={tile.name}
       closeHandler={closeCallback}
-      dialogClasses="md:max-w-6xl md:!w-full h-4/6"
+      dialogClasses="md:!max-w-6xl md:!w-full h-4/6 max-h-4/6"
     >
       <TileManager tilesStorage={tile.items} onGroup={true} groupItem={tile} />
     </Modal>

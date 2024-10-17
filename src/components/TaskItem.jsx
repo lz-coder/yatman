@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import IconLabelButton from "./widgets/IconLabelButton";
-import { FaPen, FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaTrash } from "react-icons/fa";
 import TaskModel from "../models/task";
 import SubtaskItem from "./SubtaskItem";
-import TextBox from "./widgets/TextBox";
+import TextBox from "./widgets/InputBox";
+import InputBox from "./widgets/InputBox";
 
 export default function TaskItem({ task, onCompleted, deleteCallback }) {
   const [completed, setCompleted] = useState(task.completed);
@@ -36,11 +37,6 @@ export default function TaskItem({ task, onCompleted, deleteCallback }) {
     if (e.code === "Enter") {
       e.target.blur();
     }
-  }
-
-  function buttonEditTaskHandleClick() {
-    setInputTaskNameIsDisabled(!inputTaskNameIsDisabled);
-    inputTaskNamePreChangeValue.current = task.name;
   }
 
   function saveTask(e) {
@@ -78,14 +74,7 @@ export default function TaskItem({ task, onCompleted, deleteCallback }) {
             }}
           ></input>
         </div>
-        <TextBox
-          value={inputTaskNameValue}
-          autoFocus={true}
-          onBlur={inputTaskNameHandleBlur}
-          onChange={inputTaskNameHandleChange}
-          onKeyUp={inputTaskNameHandleKeyUp}
-          disabled={inputTaskNameIsDisabled}
-        />
+        <InputBox value={task.name} />
         <div className="ml-2 flex w-fit gap-4">
           <IoMdArrowDropdown
             size={28}
@@ -96,8 +85,8 @@ export default function TaskItem({ task, onCompleted, deleteCallback }) {
       </div>
       {expanded && (
         <div className="px-2">
-          <div className="mb-2 bg-green-300 py-1 text-center text-black">
-            <p>{task.desc}</p>
+          <div className="mb-2 min-h-4 bg-green-300 py-6 text-center text-black">
+            <InputBox value={task.desc} placeholder="Write a description..." />
           </div>
           {subtasksStorage.length > 0 && (
             <div className="ml-2">

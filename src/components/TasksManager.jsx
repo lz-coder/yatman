@@ -1,12 +1,14 @@
 import { FaPlus } from "react-icons/fa";
 import Modal from "./Modal";
 import ActionsToolbar from "./ActionsToolbar";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import TaskModel from "../models/task";
 import TaskItem from "./TaskItem";
 
 export default function TasksManager({ project, closeCallback }) {
   const [tasksStorage, setTasksStorage] = useState(project.tasks);
+
+  let creatingNewTask = useRef(false);
 
   const actionsList = [
     {
@@ -14,6 +16,7 @@ export default function TasksManager({ project, closeCallback }) {
       icon: <FaPlus />,
       action: () => {
         project.addTask(new TaskModel("", "", false));
+        creatingNewTask.current = true;
         updateTasksStorage();
       },
       show: true,
@@ -52,6 +55,7 @@ export default function TasksManager({ project, closeCallback }) {
                 task={task}
                 onCompleted={updateTasksStorage}
                 deleteCallback={deleteTasks}
+                isNew={creatingNewTask.current}
               />
             );
           })}

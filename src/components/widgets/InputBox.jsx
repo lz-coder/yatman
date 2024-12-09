@@ -10,6 +10,9 @@ export default function InputBox({
   placeholder = "",
   active = false,
   textAlign = "center",
+  onChange,
+  onBlur,
+  onKeyUp,
 }) {
   const [isActive, setIsActive] = useState(active);
   const [inputValue, setInputValue] = useState(value);
@@ -33,14 +36,17 @@ export default function InputBox({
 
   function boxHandleClick(e) {
     setIsActive(true);
+    console.log(inputValue);
   }
 
   function inputHandleBlur(e) {
     setIsActive(false);
+    onBlur && onBlur(e);
   }
 
   function inputHandleChange(e) {
     setInputValue(e.target.value);
+    onChange && onChange(e);
   }
 
   return (
@@ -57,9 +63,10 @@ export default function InputBox({
           value={inputValue}
           onBlur={inputHandleBlur}
           onChange={inputHandleChange}
+          onKeyUp={onKeyUp}
         ></input>
       ) : (
-        <p>{value}</p>
+        <p>{inputValue}</p>
       )}
     </div>
   );

@@ -4,18 +4,20 @@ import IconLabelButton from "./widgets/IconLabelButton";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import TaskModel from "../models/task";
 import SubtaskItem from "./SubtaskItem";
-import TextBox from "./widgets/InputBox";
 import InputBox from "./widgets/InputBox";
 
-export default function TaskItem({ task, onCompleted, deleteCallback }) {
+export default function TaskItem({
+  task,
+  onCompleted,
+  deleteCallback,
+  isNew = false,
+}) {
   const [completed, setCompleted] = useState(task.completed);
   const [expanded, setExpanded] = useState(false);
   const [subtasksStorage, setSubtasksStorage] = useState(task.subtasks);
 
   const [inputTaskNameValue, setInputTaskNameValue] = useState(task.name);
-  const [inputTaskNameIsDisabled, setInputTaskNameIsDisabled] = useState(
-    task.name.length > 0,
-  );
+
   const inputTaskNamePreChangeValue = useRef(task.name);
 
   const expandedClasses = "rotate-180";
@@ -25,21 +27,6 @@ export default function TaskItem({ task, onCompleted, deleteCallback }) {
   }
 
   function inputTaskNameHandleBlur(e) {
-    saveTask(e);
-  }
-
-  function inputTaskNameHandleChange(e) {
-    task.name = e.target.value;
-    setInputTaskNameValue(task.name);
-  }
-
-  function inputTaskNameHandleKeyUp(e) {
-    if (e.code === "Enter") {
-      e.target.blur();
-    }
-  }
-
-  function saveTask(e) {
     if (
       e.target.value.length <= 0 &&
       inputTaskNamePreChangeValue.current.length <= 0
@@ -50,7 +37,18 @@ export default function TaskItem({ task, onCompleted, deleteCallback }) {
       inputTaskNamePreChangeValue.current.length > 0
     ) {
       task.name = inputTaskNamePreChangeValue.current;
-      setInputTaskNameValue(task.name);
+      setInputTaskNameValue("task.name");
+      console.log(inputTaskNameValue);
+    }
+  }
+
+  function inputTaskNameHandleChange(e) {
+    task.name = e.target.value;
+  }
+
+  function inputTaskNameHandleKeyUp(e) {
+    if (e.code === "Enter") {
+      e.target.blur();
     }
   }
 
@@ -74,7 +72,13 @@ export default function TaskItem({ task, onCompleted, deleteCallback }) {
             }}
           ></input>
         </div>
-        <InputBox value={task.name} />
+        <InputBox
+          value={inputTaskNameValue}
+          onChange={(e) => inputTaskNameHandleChange(e)}
+          onBlur={(e) => inputTaskNameHandleBlur(e)}
+          onKeyUp={(e) => inputTaskNameHandleKeyUp(e)}
+          active={isNew}
+        />
         <div className="ml-2 flex w-fit gap-4">
           <IoMdArrowDropdown
             size={28}

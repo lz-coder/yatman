@@ -175,7 +175,13 @@ export default function TileManager({
 
       {showProjectModal && (
         <ProjectGroupCreationModal
-          title={modalGroupMode ? "New Group" : "New Project or Group"}
+          title={
+            modalGroupMode
+              ? "New Group"
+              : onGroup
+                ? "New Project"
+                : "New Project or Group"
+          }
           closeHandler={
             modalGroupMode
               ? () => setShowProjectModal(false)

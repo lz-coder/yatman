@@ -62,7 +62,12 @@ export default function ProjectGroupCreationModal({
   }
 
   return (
-    <Modal title={title} closeHandler={closeHandler} onKeyUp={keyupHandler}>
+    <Modal
+      title={title}
+      closeHandler={closeHandler}
+      onKeyUp={keyupHandler}
+      dialogClasses="h-fit"
+    >
       <div>
         {!groupMode && !onGroup && (
           <div className="flex items-center justify-center gap-2">

@@ -20,6 +20,7 @@ const ConfirmationDialog = ({
       closeHandler={closeDialogCallback}
       onKeyUp={closeDialogCallback}
       titlebarClasses={`${isDestructive && "bg-orange-400"}`}
+      dialogClasses="h-fit"
     >
       <div>
         <p className={`text-center text-lg font-semibold ${messageClasses}`}>

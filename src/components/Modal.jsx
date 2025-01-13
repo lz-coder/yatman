@@ -10,11 +10,11 @@ const Modal = ({
 }) => {
   return (
     <div
-      className="fixed left-0 top-0 grid h-full w-full place-items-center overflow-hidden bg-black bg-opacity-20"
+      className="fixed left-0 top-0 grid h-full w-full justify-items-center overflow-hidden bg-black bg-opacity-20"
       onClick={closeHandler}
     >
       <div
-        className={`mb-40 flex w-full max-w-sm flex-col border-2 border-solid border-slate-700 bg-slate-600 p-2 text-white shadow-xl md:w-auto md:min-w-80 md:max-w-xl ${dialogClasses}`}
+        className={`mt-[10dvh] flex w-full max-w-sm flex-col border-2 border-solid border-slate-700 bg-slate-600 p-2 text-white shadow-xl md:w-auto md:min-w-80 md:max-w-xl ${dialogClasses}`}
         onClick={(e) => e.stopPropagation()}
         onKeyUp={onKeyUp}
       >

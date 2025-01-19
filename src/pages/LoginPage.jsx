@@ -1,9 +1,12 @@
 import { useState, useRef, useEffect } from "react";
+import serverAddress from "../lib/serveraddress";
+import { FaArrowRight } from "react-icons/fa";
 
 const activeTabStyles =
   "border-l border-r border-t border-gray-600 text-lg font-semibold";
 const tabStyles = "py-1 px-3 w-full";
 const inactiveTabStyles = "border-b border-gray-600";
+const inputStyles = "border border-gray-800 px-1 py-2";
 
 export default function LoginPage() {
   const [newUser, setNewUser] = useState(false);
@@ -19,7 +22,7 @@ export default function LoginPage() {
     if (!e.target.checkValidity()) return;
     e.preventDefault();
 
-    let url = "http://localhost:3000/login";
+    let url = "/login";
 
     const formData = new FormData(formRef.current);
 
@@ -29,11 +32,11 @@ export default function LoginPage() {
     };
 
     if (newUser) {
-      url = "http://localhost:3000/user";
+      url = "/user";
       reqBody.email = formData.get("email");
     }
 
-    const response = await fetch(url, {
+    const response = await fetch(`${serverAddress}${url}`, {
       method: formRef.current.method,
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -63,6 +66,7 @@ export default function LoginPage() {
               id="email"
               name="email"
               required
+              className={inputStyles}
             />
           </>
         )}
@@ -73,6 +77,7 @@ export default function LoginPage() {
           placeholder="Enter your Username..."
           id="username"
           name="username"
+          className={inputStyles}
         />
         <label htmlFor="password" className="mt-2">
           Password
@@ -84,6 +89,7 @@ export default function LoginPage() {
           placeholder="Enter your Password..."
           id="password"
           name="password"
+          className={inputStyles}
         />
 
         {errorMessage && (
@@ -93,7 +99,10 @@ export default function LoginPage() {
         )}
 
         <div className="absolute bottom-4 left-0 flex w-full justify-center">
-          <button>{buttonText}</button>
+          <button className="flex items-center gap-2 border border-green-400 bg-green-300 px-2 py-1">
+            {buttonText}
+            <FaArrowRight />
+          </button>
         </div>
       </div>
     );

@@ -6,7 +6,7 @@ const activeTabStyles =
   "border-l border-r border-t border-gray-600 text-lg font-semibold";
 const tabStyles = "py-1 px-3 w-full";
 const inactiveTabStyles = "border-b border-gray-600";
-const inputStyles = "border border-gray-800 px-1 py-2";
+const inputStyles = "border border-gray-800 px-1 py-2 mb-2";
 
 export default function LoginPage() {
   const [newUser, setNewUser] = useState(false);
@@ -56,7 +56,7 @@ export default function LoginPage() {
     let buttonText = login ? "Log in" : "Sign up";
 
     return (
-      <div className="flex flex-col">
+      <div className="mt-4 flex flex-col">
         {!login && (
           <>
             <label htmlFor="email">Email</label>
@@ -99,7 +99,7 @@ export default function LoginPage() {
         )}
 
         <div className="absolute bottom-4 left-0 flex w-full justify-center">
-          <button className="flex items-center gap-2 border border-green-400 bg-green-300 px-2 py-1">
+          <button className="flex items-center gap-1 border border-green-400 bg-green-300 px-2 py-1">
             {buttonText}
             <FaArrowRight />
           </button>
@@ -109,16 +109,16 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="mx-auto grid h-screen min-h-screen w-full max-w-7xl grid-rows-6 md:grid-cols-6 md:grid-rows-1">
-      <div className="row-span-2 flex flex-col items-center justify-center md:col-span-3">
+    <main className="mx-auto grid min-h-screen w-full max-w-7xl grid-rows-6 lg:grid-cols-6 lg:grid-rows-1">
+      <div className="row-span-2 flex flex-col items-center justify-center lg:col-span-3">
         <p className="text-5xl font-medium lg:text-7xl">Welcome!</p>
         <h1 className="text-2xl font-semibold lg:text-4xl">
           This is <strong className="font-extrabold">YATMAN</strong>
         </h1>
         <h2>Your friend for tasks management!</h2>
       </div>
-      <div className="row-span-3 flex justify-center md:col-span-3 md:items-center">
-        <div className="max-h-96 w-4/5 md:h-4/6">
+      <div className="row-span-3 flex justify-center lg:col-span-3 lg:items-center">
+        <div className="w-4/5 md:h-[30rem]">
           <div className="flex justify-center">
             <button
               onClick={() => {
@@ -140,15 +140,26 @@ export default function LoginPage() {
             </button>
           </div>
           <div className="relative h-full border border-t-0 border-gray-600 px-4">
-            <form ref={formRef} onSubmit={submitForm} method="POST">
+            <form
+              className="pt-10"
+              ref={formRef}
+              onSubmit={submitForm}
+              method="POST"
+            >
               {newUser ? (
                 <>
-                  <p>Create your account!</p>
-                  <p>Its free, easy and you will love the result</p>
+                  <p className="text-center text-base font-bold">
+                    Create your account!
+                  </p>
+                  <p className="text-center text-sm">
+                    Its free, easy and you will love the result
+                  </p>
                 </>
               ) : (
                 <>
-                  <p>Enter in your account!</p>
+                  <p className="text-center text-base font-bold">
+                    Enter in your account!
+                  </p>
                 </>
               )}
 
